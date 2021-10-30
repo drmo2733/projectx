@@ -29,16 +29,65 @@ public class ArrayUtil {
         return min;
     }
 
-    int evens(int[] array) {
-        int evens ;
-        evens = 0;
+    void evens(int[] array) {
+        int evens = array[0];
+
         for (int i = 0; i < array.length; i++) {
             if (array[i] % 2 == 0) {
-                System.out.print(array[i] + " ");
+                evens = array[i];
+                System.out.print(evens + " ");
             }
         }
         System.out.println();
-        return evens;
+
     }
 
+    void odds(int[] array) {
+        int odds = array[0];
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] % 2 != 0) {
+                odds = array[i];
+                System.out.print(odds + " ");
+            }
+        }
+        System.out.println();
+    }
+
+    int evenCount(int[] array) {
+        int evenCount = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] % 2 == 0) {
+                evenCount++;
+            }
+        }
+        return evenCount;
+    }
+
+    int oddCount(int[] array) {
+        int oddCount = 0;
+        for (int i = 0; i < array.length; i++) {
+            if (array[i] % 2 != 0) {
+                oddCount++;
+            }
+        }
+        return oddCount;
+    }
+
+    double sum(int[] array) {
+        int sum = 0;
+        for (int i = 0; i < array.length; i++) {
+            sum += array[i];
+        }
+        return sum;
+    }
+
+    double avg(int[] array) {
+        int avg = 0;
+        int sum = 0;
+        for (int i = 0; i < array.length; i++) {
+            sum += array[i];
+            avg = sum / array.length;
+        }
+        return avg;
+    }
 }
