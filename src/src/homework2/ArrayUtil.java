@@ -82,8 +82,8 @@ public class ArrayUtil {
     }
 
     double avg(int[] array) {
-        int avg = 0;
-        int sum = 0;
+        double avg = 0;
+        double sum = 0;
         for (int i = 0; i < array.length; i++) {
             sum += array[i];
             avg = sum / array.length;

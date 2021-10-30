@@ -17,6 +17,7 @@ public class ArrayUtilTest {
         System.out.println("odd count = " + oddCount);
         double sum = arrayUtil.sum(array);
         System.out.println("sum = " + sum);
+        System.out.println("avg = " + sum/ array.length);
         double avg = arrayUtil.avg(array);
         System.out.println(avg);
 
