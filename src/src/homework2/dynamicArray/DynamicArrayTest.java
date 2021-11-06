@@ -7,11 +7,15 @@ public class DynamicArrayTest {
         da.add(5);
         da.add(8);
         da.add(7);
-        da.print();
-        int byIndex = da.getByIndex(2);
+        da.add(4);
+        da.add(99);
+        da.add(18);
+
+        int byIndex = da.getByIndex(5);
         System.out.println(byIndex);
 
         da.print();
+
 
     }
 }
