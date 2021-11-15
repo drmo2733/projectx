@@ -25,4 +25,8 @@ public class Stack {
             return array[size--];
         }
     }
+
+    public boolean isEmpty() {
+        return size == -1;
+    }
 }
