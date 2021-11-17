@@ -5,6 +5,10 @@ public class AuthorStorage {
     private Author[] array = new Author[10];
     private int size = 0;
 
+    AuthorStorage() {
+        array = new Author[10];
+    }
+
 
     public void add(Author author) {
         if (array.length == size) {
@@ -29,6 +33,7 @@ public class AuthorStorage {
         for (int i = 0; i < size; i++) {
             System.out.println(array[i]);
         }
+        System.out.println();
 
 
     }

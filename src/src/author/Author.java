@@ -7,12 +7,17 @@ public class Author {
     private int age;
     private String gender;
 
-    Author() {
+    public Author() {
 
     }
 
-    Author(String name, String surname, String email,
+    public Author(String name, String surname, String email,
            int age, String gender) {
+        this.name=name;
+        this.surname=surname;
+        this.email=email;
+        this.age=age;
+        this.gender=gender;
 
     }
 
