@@ -16,7 +16,8 @@ public class AuthorTest {
     private static final String ADD_BOOK = "5";
     private static final String SEARCH_BOOKS_BY_TITLE = "6";
     private static final String SEARCH_BOOKS_BY_WRITER = "7";
-    private static final String PRINT_BOOKS = "8";
+    private static final String SEARCH_BOOKS_BY_PRICE = "8";
+    private static final String PRINT_BOOKS = "9";
 
 
     public static void main(String[] args) {
@@ -61,6 +62,9 @@ public class AuthorTest {
                 case SEARCH_BOOKS_BY_WRITER:
                     searchByWriter();
                     break;
+                case SEARCH_BOOKS_BY_PRICE:
+                    searchByPrice();
+                    break;
                 case PRINT_BOOKS:
                     bookStorage.print();
                     break;
@@ -68,6 +72,14 @@ public class AuthorTest {
                     System.out.println("Invalid command");
             }
         }
+    }
+
+    private static void searchByPrice() {
+        System.out.println("please input min price");
+        double minPrice = Double.parseDouble(scanner.nextLine());
+        System.out.println("please input max price");
+        double maxPrice = Double.parseDouble(scanner.nextLine());
+        bookStorage.searchByPrice(minPrice, maxPrice);
     }
 
     private static void searchByWriter() {
@@ -117,6 +129,7 @@ public class AuthorTest {
         System.out.println("please input " + ADD_BOOK + " for add book");
         System.out.println("please input " + SEARCH_BOOKS_BY_TITLE + " for searching books by title");
         System.out.println("please input " + SEARCH_BOOKS_BY_WRITER + " for searching books by writer");
+        System.out.println("please input " + SEARCH_BOOKS_BY_PRICE + " for searching books by price");
         System.out.println("please input " + PRINT_BOOKS + " for print books");
     }
 

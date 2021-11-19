@@ -41,4 +41,14 @@ public class BookStorage {
 
         }
     }
+
+    public void searchByPrice(double minPrice, double maxPrice) {
+        for (int i = 0; i < size; i++) {
+            if (books[i].getPrice() > minPrice
+                    && books[i].getPrice() < maxPrice) {
+                System.out.println(books[i]);
+            }
+
+        }
+    }
 }
