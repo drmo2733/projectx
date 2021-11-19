@@ -6,19 +6,30 @@ public class Book {
     private String description;
     private double price;
     private int count;
+    private String writer;
 
     public Book() {
     }
 
-    public Book(String title, String description, double price, int count) {
+    public Book(String title, String description, double price,
+                int count, String writer) {
         this.title = title;
         this.description = description;
         this.price = price;
         this.count = count;
+        this.writer=writer;
     }
 
     public String getTitle() {
         return title;
+    }
+
+    public String getWriter() {
+        return writer;
+    }
+
+    public void setWriter(String writer) {
+        this.writer = writer;
     }
 
     public void setTitle(String title) {
@@ -56,6 +67,7 @@ public class Book {
                 ", description='" + description + '\'' +
                 ", price=" + price +
                 ", count=" + count +
+                "writer='" + writer + '\'' +
                 '}';
     }
 }

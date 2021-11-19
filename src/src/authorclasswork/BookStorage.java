@@ -32,4 +32,13 @@ public class BookStorage {
 
         }
     }
+
+    public void searchByWriter(String keyword) {
+        for (int i = 0; i < size; i++) {
+            if (books[i].getWriter().contains(keyword)) {
+                System.out.println(books[i]);
+            }
+
+        }
+    }
 }
