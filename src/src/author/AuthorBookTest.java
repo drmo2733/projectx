@@ -9,6 +9,7 @@ public class AuthorBookTest {
     static AuthorStorage authorStorage = new AuthorStorage();
     static BookStorage bookStorage = new BookStorage();
 
+
     private static final String EXIT = "0";
     private static final String ADD_AUTHOR = "1";
     private static final String ADD_BOOK = "2";
@@ -21,6 +22,9 @@ public class AuthorBookTest {
     private static final String COUNT_BOOKS_BY_AUTHOR = "9";
     private static final String CHANGE_AUTHOR = "10";
     private static final String CHANGE_BOOK_AUTHOR = "11";
+    private static final String DELETE_BY_AUTHOR = "12";
+    private static final String DELETE_AUTHOR = "13";
+    private static final String DELETE_BOOK = "14";
 
 
     public static void main(String[] args) {
@@ -70,6 +74,15 @@ public class AuthorBookTest {
                 case CHANGE_BOOK_AUTHOR:
                     changeBookAuthor();
                     break;
+                case DELETE_BY_AUTHOR:
+                    deleteBooksByEmail();
+                    break;
+                case DELETE_AUTHOR:
+                    deleteAuthorByEmail();
+                    break;
+                case DELETE_BOOK:
+                    deleteBookByTitle();
+                    break;
                 default:
                     System.out.println("Invalid command!");
             }
@@ -77,14 +90,54 @@ public class AuthorBookTest {
         }
     }
 
+    private static void deleteBookByTitle() {
+        System.out.println("please input books title");
+        String title = scanner.nextLine();
+        bookStorage.deleteBooksByTitle(title);
+        System.out.println("book was deleted");
+    }
+
+    private static void deleteAuthorByEmail() {
+        System.out.println("please input authors email");
+        String email = scanner.nextLine();
+        authorStorage.deleteAuthorByEmail(email);
+        System.out.println("author is DEATH");
+
+    }
+
+    private static void deleteBooksByEmail() {
+        System.out.println("please choose author's email");
+        String email = scanner.nextLine();
+        if (authorStorage.getByEmail(email) != null) {
+            bookStorage.deleteBooksByEmail(email);
+            System.out.println("books deleted");
+        } else {
+            System.out.println("invalid email");
+        }
+
+
+    }
+
     private static void changeBookAuthor() {
+
+
         System.out.println("please input books title");
         String title = scanner.nextLine();
         Book book = bookStorage.changeBookAuthor(title);
-        System.out.println("please input new authors email");
-        String email = scanner.nextLine();
-        book.setAuthor(authorStorage.getByEmail(email));
-        System.out.println("Books Author was changed");
+        if (book != null) {
+            System.out.println("please input new authors email");
+            String email = scanner.nextLine();
+            Author author = authorStorage.getByEmail(email);
+            if (author != null) {
+                book.setAuthor(author);
+                System.out.println("Books Author was changed");
+            } else {
+                System.out.println("invalid email");
+            }
+        } else {
+            System.out.println("invalid title");
+        }
+
     }
 
     private static void changeAuthor() {
@@ -185,7 +238,10 @@ public class AuthorBookTest {
         System.out.println("please input " + SEARCH_BOOKS_BY_AUTHOR + " for search book by author");
         System.out.println("please input " + COUNT_BOOKS_BY_AUTHOR + " for count of books by author");
         System.out.println("please input " + CHANGE_AUTHOR + " for change author");
-        System.out.println("please input " + CHANGE_BOOK_AUTHOR + " for change books author" + "\u001B[0m");
+        System.out.println("please input " + CHANGE_BOOK_AUTHOR + " for change books author");
+        System.out.println("please input " + DELETE_BY_AUTHOR + " for deleting books by author");
+        System.out.println("please input " + DELETE_AUTHOR + " for deleting author");
+        System.out.println("please input " + DELETE_BOOK + " for deleting book" + "\u001B[0m");
     }
 
     private static void searchByName() {
