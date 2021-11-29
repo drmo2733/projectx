@@ -17,6 +17,7 @@ public class LessonStudentTest {
     private static final String PRINT_LESSONS = "5";
     private static final String DELETE_LESSON_BY_NAME = "6";
     private static final String DELETE_STUDENT_BY_EMAIL = "7";
+    private static final String CHANGE_STUDENTS_PHONE_NUMBER = "8";
 
     private static void printCommands() {
         System.out.println("\u001B[31m" + "please input " + EXIT + " for EXIT");
@@ -27,6 +28,7 @@ public class LessonStudentTest {
         System.out.println("please input " + PRINT_LESSONS + " for print lessons");
         System.out.println("please input " + DELETE_LESSON_BY_NAME + " for delete lesson by name");
         System.out.println("please input " + DELETE_STUDENT_BY_EMAIL + " for delete student by email" + "\u001B[31m");
+        System.out.println("please input " + CHANGE_STUDENTS_PHONE_NUMBER + " for change students number ");
     }
 
     public static void main(String[] args) {
@@ -67,10 +69,30 @@ public class LessonStudentTest {
                 case DELETE_STUDENT_BY_EMAIL:
                     deleteStudentByEmail();
                     break;
+                case CHANGE_STUDENTS_PHONE_NUMBER:
+                    changeStudentsPhoneNumber();
+                    break;
                 default:
                     System.out.println("Invalid command!");
             }
         }
+    }
+
+    private static void changeStudentsPhoneNumber() {
+        System.out.println("please choose student phonenumber");
+        System.out.println("--------");
+        studentStorage.print();
+        System.out.println("--------");
+        String phone = scanner.nextLine();
+        Student student = studentStorage.getByPhone(phone);
+        if (phone!=null){
+            System.out.println("enter new number");
+            String newPhone =scanner.nextLine();
+            student.setPhone(newPhone);
+        }else {
+            System.err.println("phone is wrong");
+        }
+
     }
 
     private static void deleteStudentByEmail() {

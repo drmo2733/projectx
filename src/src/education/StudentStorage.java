@@ -50,4 +50,14 @@ public class StudentStorage {
             }
         }
     }
+
+
+    public Student getByPhone(String phone) {
+        for (int i = 0; i < size; i++) {
+            if (students[i].getPhone().equals(phone)) {
+                return students[i];
+            }
+        }
+        return null;
+    }
 }
