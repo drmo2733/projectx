@@ -2,6 +2,7 @@ package src.education;
 
 public class StudentStorage {
     private Student[] students = new Student[18];
+
     private int size;
 
     public void add(Student student) {
@@ -45,7 +46,7 @@ public class StudentStorage {
 
     public void printByLesson(Lesson lesson) {
         for (int i = 0; i < size; i++) {
-            if (students[i].getLesson().equals(lesson)) {
+            if (students[i].getLessons().equals(lesson)) {
                 System.out.println(students[i]);
             }
         }
@@ -54,7 +55,7 @@ public class StudentStorage {
 
     public Student getByPhone(String phone) {
         for (int i = 0; i < size; i++) {
-            if (students[i].getPhone().equals(phone)) {
+            if (students[i].getPhoneNumber().equals(phone)) {
                 return students[i];
             }
         }

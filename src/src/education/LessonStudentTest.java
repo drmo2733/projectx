@@ -85,11 +85,11 @@ public class LessonStudentTest {
         System.out.println("--------");
         String phone = scanner.nextLine();
         Student student = studentStorage.getByPhone(phone);
-        if (phone!=null){
+        if (phone != null) {
             System.out.println("enter new number");
-            String newPhone =scanner.nextLine();
-            student.setPhone(newPhone);
-        }else {
+            String newPhone = scanner.nextLine();
+            student.setPhoneNumber(newPhone);
+        } else {
             System.err.println("phone is wrong");
         }
 
@@ -102,10 +102,10 @@ public class LessonStudentTest {
         System.out.println("--------");
         String email = scanner.nextLine();
         Student student = studentStorage.getByEmail(email);
-        if (student!=null){
+        if (student != null) {
             studentStorage.delete(student);
             System.out.println("Student is fired");
-        }else {
+        } else {
             System.err.println("student with this email does not exists");
         }
     }
@@ -150,22 +150,21 @@ public class LessonStudentTest {
         String studentDataStr = scanner.nextLine();
         String[] studentData = studentDataStr.split(",");
         int age = Integer.parseInt(studentData[2]);
-        String lessonName = studentData[5];
-        Lesson lesson = lessonStorage.getByName(lessonName);
-        if (lesson != null) {
-            if (studentData.length == 6) {
-                Student student = studentStorage.getByEmail(studentData[3]);
-                if (student == null) {
-                    Student newStudent = new Student(studentData[0], studentData[1], age,
-                            studentData[3], studentData[4], lesson);
-                    studentStorage.add(newStudent);
-                    System.out.println("Thank you, student was added");
-                }
-            } else {
-                System.err.println("Student already exists");
+        String name = scanner.nextLine();
+        String[] lessonName = name.split(",");
+        Lesson[] lessonNames = new Lesson[lessonName.length];
+        for (int i = 0; i < lessonName.length; i++) {
+            if (lessonStorage.getByName(lessonName[i])!=null) {
+                lessonNames[i]=lessonStorage.getByName(lessonName[i]);
             }
         }
+
+        Student newStudent = new Student(studentData[0], studentData[1], age,
+                studentData[3], studentData[4], lessonNames);
+        studentStorage.add(newStudent);
+        System.out.println("Thank you, student was added");
     }
+
 
     private static void addLesson() {
         System.out.println("please input lesson's name,duration,lecturerName,price");
