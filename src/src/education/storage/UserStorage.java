@@ -47,22 +47,8 @@ public class UserStorage {
         return null;
     }
 
-    public boolean checkPassword(String password) {
-        for (int i = 0; i < size; i++) {
-            if (users[i].getPassword().equals(password)) {
-                return true;
-            }
-        }
-        return false;
-    }
 
 
-    public Object getByType(String email) {
-        for (int i = 0; i < size; i++) {
-            if (users[i].getEmail().equals(email) ){
-                return users[i].getType();
-            }
-        } return null;
 
-    }
+
 }

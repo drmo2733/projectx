@@ -1,5 +1,6 @@
 package src.education.storage;
 
+import src.education.exception.studentNotFoundException;
 import src.education.model.Lesson;
 import src.education.model.Student;
 import src.education.util.ArrayUtil;
@@ -61,12 +62,12 @@ public class StudentStorage {
     }
 
 
-    public Student getByPhone(String phone) {
+    public Student getByPhone(String phone) throws studentNotFoundException {
         for (int i = 0; i < size; i++) {
             if (students[i].getPhoneNumber().equals(phone)) {
                 return students[i];
             }
         }
-        return null;
+        throw new studentNotFoundException("student does not exists. phone: " + phone);
     }
 }
