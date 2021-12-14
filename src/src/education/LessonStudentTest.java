@@ -2,6 +2,7 @@ package src.education;
 
 
 import src.education.exception.studentNotFoundException;
+import src.education.exception.userNotFoundException;
 import src.education.model.Lesson;
 import src.education.model.Student;
 import src.education.model.User;
@@ -79,37 +80,44 @@ public class LessonStudentTest implements UserCommands {
         String userDataStr = scanner.nextLine();
         String[] userData = userDataStr.split(",");
         if (userData.length == 5) {
-            if (userData[4].equalsIgnoreCase("admin") || userData[4].equalsIgnoreCase("user")) {
-                if (userStorage.getByEmail(userData[2]) == null) {
-                    User user = new User(userData[0], userData[1], userData[2],
-                            userData[3], userData[4].toUpperCase());
-                    userStorage.add(user);
-                    System.out.println("user is added successfully");
-                } else {
-                    System.err.println("email already exists");
-                }
-            } else {
-                System.err.println("invalid type");
+                try {
+                    userStorage.getByEmail(userData[2]);
+                        System.err.println("email already exists");
+                    } catch (userNotFoundException e) {
+                    if (userData[4].equalsIgnoreCase("admin")
+                            || userData[4].equalsIgnoreCase("user")) {
+                        User user = new User(userData[0], userData[1], userData[2],
+                                userData[3], userData[4].toUpperCase());
+                        userStorage.add(user);
+                        System.out.println("user is added successfully");
+
+                }else{
+                        System.out.println(e.getMessage());
+                    }
             }
         } else {
             System.err.println("invalid data");
         }
     }
 
-    private static void login() throws ParseException {
+    private static void login(){
         System.out.println("please input email and password");
         String personalDataStr = scanner.nextLine();
         String[] personalData = personalDataStr.split(",");
-        User user = userStorage.getByEmail(personalData[0]);
-        if (user != null && user.getPassword().equals(personalData[1])) {
-            if (user.getType().equalsIgnoreCase("admin")) {
-                adminCase();
-            } else if (user.getType().equalsIgnoreCase("user")) {
-                userCase();
+        User user = null;
+        try {
+            user = userStorage.getByEmail(personalData[0]);
+            if (user != null && user.getPassword().equals(personalData[1])) {
+                if (user.getType().equalsIgnoreCase("admin")) {
+                    adminCase();
+                } else if (user.getType().equalsIgnoreCase("user")) {
+                    userCase();
+                }
             }
-        } else {
-            System.out.println("personaldata isn't correct");
+        } catch (userNotFoundException e) {
+            System.out.println(e.getMessage());
         }
+
     }
 
     private static void userCase() {
