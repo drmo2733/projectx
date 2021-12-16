@@ -1,6 +1,6 @@
 package src.scanner;
 
-import src.calc.Calculator;
+import src.homework.calc.Calculator;
 
 import java.util.Scanner;
 

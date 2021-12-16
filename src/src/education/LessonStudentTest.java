@@ -6,6 +6,7 @@ import src.education.exception.userNotFoundException;
 import src.education.model.Lesson;
 import src.education.model.Student;
 import src.education.model.User;
+import src.education.model.UserType;
 import src.education.storage.LessonStorage;
 import src.education.storage.StudentStorage;
 import src.education.storage.UserStorage;
@@ -25,9 +26,10 @@ public class LessonStudentTest implements UserCommands {
     public static void main(String[] args) throws ParseException {
 
         userStorage.add(new User("Valod", "Hakobyan",
-                "valod@mail.com", "qwe123", "admin"));
+                "valod@mail.com", "qwe123", UserType.ADMIN
+        ));
         userStorage.add(new User("Hamlet", "Vardanyan",
-                "hamlet@mail.com", "rty456", "user"));
+                "hamlet@mail.com", "rty456", UserType.USER));
 
         lessonStorage.add(new Lesson("java", 150,
                 "Karen", 35000));
@@ -36,7 +38,7 @@ public class LessonStudentTest implements UserCommands {
         lessonStorage.add(new Lesson("c++", 120,
                 "Grish", 25000));
 
-        try {
+
             studentStorage.add(new Student("Aram", "Aramyan", 22,
                     "aram@mail.com", "033335544",
                     DateUtil.stringToDate("18/01/1999"),
@@ -50,9 +52,7 @@ public class LessonStudentTest implements UserCommands {
                     DateUtil.stringToDate("26/03/1996"),
                     new Lesson[]{lessonStorage.getByName("c++")}));
 
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+
 
         boolean isRun = true;
         while (isRun) {
@@ -87,7 +87,7 @@ public class LessonStudentTest implements UserCommands {
                     if (userData[4].equalsIgnoreCase("admin")
                             || userData[4].equalsIgnoreCase("user")) {
                         User user = new User(userData[0], userData[1], userData[2],
-                                userData[3], userData[4].toUpperCase());
+                                userData[3], UserType.valueOf(userData[4].toUpperCase()));
                         userStorage.add(user);
                         System.out.println("user is added successfully");
 
@@ -108,9 +108,9 @@ public class LessonStudentTest implements UserCommands {
         try {
             user = userStorage.getByEmail(personalData[0]);
             if (user != null && user.getPassword().equals(personalData[1])) {
-                if (user.getType().equalsIgnoreCase("admin")) {
+                if (user.getType()==UserType.ADMIN) {
                     adminCase();
-                } else if (user.getType().equalsIgnoreCase("user")) {
+                } else if (user.getType()==UserType.USER) {
                     userCase();
                 }
             }
